@@ -105,7 +105,7 @@ int main (void)
     {
     homeerr += fabs(home[e] - vegas[e]);
     }
-    printf("#    Dist               Vegas           Home       Dipolapprox\n");
+    printf("#    Dist             Vegas          Home         Dipolapprox\n");
     for( int l = 0; l < np; l++)
     {
     double dd = distance[l];
