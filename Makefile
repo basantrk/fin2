@@ -16,27 +16,19 @@ INDENT = /usr/bin/indent
 CC        = clang
 LDFLAGS   = -O
 CFLAGS    = -Weverything -Wextra -pedantic $(LDFLAGS)
-LDLIBS    = $(shell gsl-config --libs)
-GNUPLOT = gnuplot
 
 .SUFFIXES:
 .SUFFIXES:  .c .o .h
 
-target    = main
+.PHONY: edit clean veryclean
 
-$(target) : $(target).o two-cubes-integrand2.o
-	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+target    = area
+
+$(target) : $(target).c
 
 edit : $(target).c
 	$(EDITOR) $<
 	$(INDENT) $<
-
-res: main
-	./main > res
-
-show: res cubes.gp
-	$(GNUPLOT) cubes.gp
-	eog cubes.png
 
 clean : 
 	rm -f *.o
@@ -44,6 +36,3 @@ clean :
 
 veryclean : clean
 	rm  -f $(target)
-
-.PHONY: edit clean veryclean
-
